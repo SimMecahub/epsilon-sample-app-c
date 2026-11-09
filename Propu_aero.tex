@@ -1,0 +1,364 @@
+\documentclass{article}
+\usepackage[french]{babel}
+\title{Propulsion aéronautique}
+\author{Notes de cours (FR / EN)}
+\begin{document}
+\maketitle
+
+Convention : le terme anglais du cours est donné entre parenthèses après le terme français. Un glossaire complet est à la fin.
+
+\section{Turboréacteur double flux (turbofan)}
+
+\subsection{Principe}
+L'air entrant est séparé en deux flux par la soufflante (fan) :
+\begin{itemize}
+\item le flux secondaire ou flux sec (bypass flow), froid, contourne le moteur et fournit l'essentiel de la poussée (thrust) ;
+\item le flux primaire (core flow), chaud, traverse le compresseur (compressor), la chambre de combustion (combustor) et la turbine (turbine).
+\end{itemize}
+
+Dans le flux primaire, le compresseur augmente la pression ($P$ augmente donc $H$ augmente), puis la combustion augmente fortement l'enthalpie $H$ (enthalpy). La turbine récupère cette enthalpie pour entraîner, par l'arbre (shaft), le compresseur et la soufflante (« l'hélice du compresseur »).
+
+Objectif : maximiser la récupération de $H$ par la turbine.
+
+\subsection{Schémas du cours}
+Schéma 1 (dessin à la main). Les traits bleus représentent la nacelle (nacelle), le carter du moteur et la soufflante, dessinée comme une boucle à l'entrée. Les grandes flèches noires du haut et du bas sont le flux sec (flux secondaire), qui passe autour du moteur. Au centre, en rouge, le flux primaire : les petits traits sont les lignes de courant (streamlines) du gaz chaud, et la flèche « H vers la turbine » rappelle que l'enthalpie est récupérée en sortie. Le flux primaire entraîne la soufflante et le compresseur via l'arbre.
+
+Schéma 2 (photo en coupe d'un moteur). L'air froid du flux secondaire est en bleu clair : il passe autour du cœur du moteur. Le flux primaire est en rouge et orange : il passe dans le compresseur (rangées d'aubes à gauche), puis dans la chambre de combustion (les deux zones jaunes lumineuses), puis dans la turbine (rangées d'aubes à droite). On voit que les deux flux sont éjectés ensemble à l'arrière par la tuyère (nozzle).
+
+\subsection{Formules}
+Enthalpie totale (ou d'arrêt, stagnation enthalpy), avec $c_p$ chaleur massique à pression constante :
+\[ h_t = h + \frac{V^2}{2} = c_p T_t \]
+
+Travail massique récupéré par la turbine (entrée 4, sortie 5) :
+\[ w_T = h_{t4} - h_{t5} = c_p (T_{t4} - T_{t5}) \]
+
+Équilibre de l'arbre (pertes mécaniques négligées) : la turbine fournit ce que consomment compresseur et soufflante.
+\[ q_{m,T} w_T = q_{m,C} w_C + q_{m,fan} w_{fan} \]
+
+Poussée d'un double flux ($q_{m,p}$ et $q_{m,s}$ débits primaire et secondaire, $V_0$ vitesse de vol, $V_p$ et $V_s$ vitesses d'éjection) :
+\[ F = q_{m,p} (V_p - V_0) + q_{m,s} (V_s - V_0) + (P_e - P_0) A_e \]
+Le dernier terme est la poussée de pression, nulle si la tuyère est adaptée (ideally expanded, $P_e = P_0$).
+
+Taux de dilution (bypass ratio) :
+\[ \lambda = \frac{q_{m,s}}{q_{m,p}} \]
+
+Rendement propulsif (propulsive efficiency), jet unique :
+\[ \eta_p = \frac{2}{1 + V_e / V_0} \]
+Un grand débit éjecté lentement est plus efficace qu'un petit débit éjecté vite : c'est l'intérêt d'un fort taux de dilution.
+
+\section{Rappels d'écoulement compressible}
+
+Vitesse du son (speed of sound) et nombre de Mach (Mach number), avec $\gamma = 1,4$ pour l'air et $r = 287$ J/(kg.K) :
+\begin{align}
+a &= \sqrt{\gamma r T} \\
+M &= V / a
+\end{align}
+
+Relations isentropiques (grandeurs d'arrêt, stagnation quantities) :
+\begin{align}
+\frac{T_t}{T} &= 1 + \frac{\gamma - 1}{2} M^2 \\
+\frac{P_t}{P} &= \left(1 + \frac{\gamma - 1}{2} M^2\right)^{\gamma/(\gamma - 1)}
+\end{align}
+
+Relation d'Hugoniot (lien section / vitesse) :
+\[ \frac{dA}{A} = (M^2 - 1) \frac{dV}{V} \]
+\begin{itemize}
+\item En subsonique ($M < 1$) : un convergent accélère, un divergent ralentit.
+\item En supersonique ($M > 1$) : c'est l'inverse, le divergent accélère.
+\item $M = 1$ ne peut être atteint qu'au col (throat), où $dA = 0$.
+\end{itemize}
+
+Rapport de sections ($A^*$ : section sonique) :
+\[ \frac{A}{A^*} = \frac{1}{M} \left( \frac{2}{\gamma + 1} \left(1 + \frac{\gamma - 1}{2} M^2\right) \right)^{(\gamma + 1)/(2(\gamma - 1))} \]
+
+Débit bloqué (choked flow) : une fois $M = 1$ au col, le débit ne dépend plus de la pression aval.
+\[ q_m = \frac{A^* P_t}{\sqrt{T_t}} \sqrt{\frac{\gamma}{r}} \left(\frac{\gamma + 1}{2}\right)^{-(\gamma + 1)/(2(\gamma - 1))} \]
+
+\section{Régimes de la tuyère convergente-divergente}
+
+Les 7 schémas du cours montrent une tuyère (nozzle) avec un col (throat) au milieu. L'écoulement va de gauche à droite. Le signe (−) désigne une zone subsonique ($M < 1$), le signe (+) une zone supersonique ($M > 1$). La flèche rouge verticale « M » sur les pages du cours indique que le Mach augmente quand on descend de schéma en schéma, c'est-à-dire quand la pression aval diminue.
+
+Chaque régime a un équivalent sur une aile d'avion (poche supersonique sur l'extrados), ce qui permet de relier tuyère et aérodynamique de l'aile.
+
+\subsection{Régime 1 : subsonique (subsonic)}
+Schéma : écoulement $M < 1$ partout, y compris au col. L'écoulement accélère jusqu'au col puis ralentit dans le divergent, comme dans un venturi. Le col n'a pas encore atteint Mach 1.
+
+\subsection{Régime 2 : Mach critique ($M_{cr}$, critical Mach number)}
+Schéma : un trait rouge vertical au col, noté « choc ». Le col atteint Mach 1 : c'est le premier point supersonique de l'écoulement. Le débit est désormais bloqué.
+
+$M_{cr}$ : Mach de vol (ou de fonctionnement) pour lequel le premier point de l'écoulement devient sonique.
+
+Précision : à exactement $M = 1$ au col, il s'agit d'une ligne sonique. Le choc apparaît dès que la zone supersonique se développe.
+
+\subsection{Régime 3 : poche supersonique (supersonic pocket)}
+Schéma : un petit rectangle en pointillés rouges, marqué (+), au col. Une poche supersonique se forme et se termine par un choc. C'est l'équivalent de la poche supersonique qui apparaît sur l'extrados d'une aile après $M_{cr}$. Au-delà, la poche grandit.
+
+\subsection{Régime 4 : choc normal dans le divergent (normal shock)}
+Schéma : zone (+) après le col, puis un trait rouge vertical (le choc normal) dans le divergent, puis zone (−). L'écoulement est supersonique après le col, puis le choc normal le ramène au subsonique. Le choc recule vers la sortie quand la pression aval diminue. C'est l'équivalent du Mach de divergence de traînée ($M_{DD}$, drag divergence Mach number) sur les ailes : la traînée d'onde (wave drag) devient forte.
+
+\subsection{Régime 5 : choc normal critique (critical / ultimate normal shock)}
+Schéma : le choc normal (trait rouge) est exactement à la sortie de la tuyère. C'est le point limite du choc normal : au-delà, il ne peut plus rester droit.
+
+\subsection{Régime 6 : chocs obliques (oblique shocks)}
+Schéma : à la sortie, deux traits rouges forment un « V » couché qui s'accroche aux parois. L'écoulement est trop rapide : le choc ne tient plus et s'accroche aux lèvres de sortie (nozzle lips) sous forme de chocs obliques. Le jet est sur-détendu (overexpanded, $P_e < P_0$) et les chocs le recomprimment jusqu'à $P_0$.
+
+\subsection{Régime 7 : réflexion de Mach (Mach reflection)}
+Schéma numéroté en 5 points, cas extrême :
+\begin{enumerate}
+\item chocs obliques issus des lèvres (jet sur-détendu) ;
+\item disque de Mach (Mach disk) : choc normal au centre ;
+\item point triple (triple point) : les trois chocs se rejoignent ;
+\item chocs réfléchis (reflected shocks) vers l'extérieur du jet ;
+\item ligne de glissement (slip line) : sépare la zone subsonique (derrière le disque) de la zone supersonique.
+\end{enumerate}
+La suite est la figure des diamants de choc (section suivante).
+
+Autres cas : si $P_e = P_0$, la tuyère est adaptée (pas de choc). Si $P_e > P_0$, le jet est sous-détendu (underexpanded) et se détend par des faisceaux de détente (expansion fans) aux lèvres.
+
+\section{Relations de choc}
+
+\subsection{Choc normal (Rankine-Hugoniot)}
+Indice 1 : amont (supersonique), indice 2 : aval (subsonique).
+\begin{align}
+M_2^2 &= \frac{1 + \frac{\gamma - 1}{2} M_1^2}{\gamma M_1^2 - \frac{\gamma - 1}{2}} \\
+\frac{P_2}{P_1} &= 1 + \frac{2\gamma}{\gamma + 1} (M_1^2 - 1) \\
+\frac{\rho_2}{\rho_1} &= \frac{(\gamma + 1) M_1^2}{(\gamma - 1) M_1^2 + 2} \\
+\frac{T_2}{T_1} &= \frac{P_2}{P_1} \frac{\rho_1}{\rho_2}
+\end{align}
+
+À travers le choc : $P$, $\rho$ et $T$ augmentent, $V$ diminue, $T_t$ est conservée, mais l'entropie (entropy) augmente donc $P_t$ diminue (perte de charge).
+\[ \Delta s = c_p \ln(T_2/T_1) - r \ln(P_2/P_1) > 0 \]
+
+\subsection{Choc oblique (oblique shock)}
+Seule la composante normale au choc subit un choc normal. Avec $\beta$ l'angle du choc (shock angle) et $\theta$ la déviation de l'écoulement (deflection angle) :
+\[ M_{1n} = M_1 \sin\beta \]
+\[ \tan\theta = 2 \cot\beta \frac{M_1^2 \sin^2\beta - 1}{M_1^2 (\gamma + \cos 2\beta) + 2} \]
+On applique les relations du choc normal avec $M_{1n}$ à la place de $M_1$. L'écoulement aval peut rester supersonique.
+
+\section{Diamants de choc (shock diamonds)}
+
+\subsection{Le schéma du cours}
+Le schéma montre un jet qui sort d'une tuyère (le col est à gauche, signes − puis +). Lecture :
+\begin{itemize}
+\item Encadré « Air ambiant » : $P = 1$ bar, $v = 10$ m/s, $T = 25$ °C.
+\item Encadré « Gaz du jet » : $P = 1,8$ bar, $v = 350$ m/s, $T = 1500$ K.
+\item Les courbes bleues sont la frontière du jet (jet boundary), à pression imposée par l'air ambiant. Elle forme des bosses ; les sommets sont les « extremums » (cas de l'Hugoniot).
+\item Les traits rouges pleins sont les chocs obliques issus des lèvres, qui se combinent en un choc normal sur l'axe (le disque de Mach, triangle vert).
+\item Les tirets marron sont les chocs et détentes réfléchis sur la frontière du jet. Ils dessinent le réseau de losanges, les « diamants ».
+\item Triangles verts : gaz derrière le choc normal, à $M < 1$, avec $P_2 > P_1$ et $T_2 > T_1$. Ils rapetissent vers la droite : c'est la décroissance des chocs normaux (decaying normal shocks).
+\end{itemize}
+
+\subsection{Explication physique}
+La frontière du jet est une frontière libre à pression imposée ($P_0 = 1$ bar). Une onde qui l'atteint s'y réfléchit avec la nature inverse : un choc revient en détente, une détente revient en compression. Le jet forme donc des bosses et des diamants, et le phénomène se répète en s'amortissant (mélange avec l'air ambiant).
+
+Notes du cours :
+\begin{itemize}
+\item C'est un véritable choc pour l'onde de pression créée par le moteur.
+\item Il y a réverbération (reverberation) des ondes sur l'enveloppe du gaz.
+\item Après le choc, $P$ et $T$ augmentent, ce qui provoque l'émission de photons de couleur bleue.
+\item Les gaz sont accélérés en sortie de tuyère, donc recombinaison en chocs normaux des chocs obliques.
+\item Derrière le choc normal : mini chambre de combustion. Les gaz comprimés et chauffés peuvent se rallumer (voir section suivante).
+\end{itemize}
+
+Position du premier disque de Mach (loi empirique, $D$ diamètre de sortie) :
+\[ x_M \approx 0,67 D \sqrt{\frac{P_t}{P_0}} \]
+
+Remarque : avec ces valeurs ($P_{jet} > P_0$), le jet est plutôt sous-détendu en sortie, mais la structure de réflexions est la même.
+
+\subsection{Photo du lanceur (crédit Max Evans / NSF)}
+Panache violet d'une fusée au décollage. Le cercle rouge entoure une zone très lumineuse en forme de cône : ce sont des chocs obliques recombinés en chocs normaux, la figure de Mach (Mach diamond). On y voit les diamants de choc à l'œil nu grâce à l'émission de lumière de la combustion derrière le choc.
+
+\section{Décollement et battement en sortie de tuyère}
+
+\subsection{Schéma de zoom}
+Le zoom sur les lèvres de la tuyère montre, en jaune, le décollement (flow separation) avec vortex, à l'endroit où le choc oblique s'accroche à la paroi. Au centre, derrière le choc normal : la mini chambre de combustion.
+
+Zone de tourbillons (vortices) et de turbulences extrêmes :
+\begin{itemize}
+\item zone instable, ce qui provoque un battement structurel (structural flutter) ;
+\item dégâts sur la structure (fatigue, fissures).
+\end{itemize}
+
+Critère approché de décollement en tuyère sur-détendue (Summerfield) : la couche limite (boundary layer) décolle quand la pression pariétale tombe sous environ $0,4 P_0$.
+
+\subsection{Solution}
+On adapte le design de la tuyère pour que les chocs obliques se posent au bord de la tuyère. On utilise une tuyère à géométrie variable (variable geometry nozzle), qui adapte la section de sortie $A_e$ au régime de vol. On évite ainsi le battement.
+
+\section{Rayonnement bleu (blue radiation)}
+
+\subsection{Contexte}
+Extrait du cours (anglais) : « ... where a first shock-wave produces a volume of sudden high pressure. » Traduction : un premier choc produit un volume de haute pression soudaine.
+
+Dans la section 5.3 du document source, « Investigation of the Origin of the Blue Radiation », les deux sources les plus probables de chimiluminescence bleue sont présentées et discutées.
+
+\subsection{Spectre (figure 5.2)}
+Légende anglaise : « Coarse spectrum of the flame 5 mm above the fuel lance at different pressures. » Traduction : spectre grossier de la flamme à 5 mm au-dessus de la lance à carburant, pour différentes pressions.
+
+Lecture du graphique : axe horizontal, longueur d'onde $\lambda$ en nm (de 300 à 500). Axe vertical, intensité lumineuse $L$ en unités arbitraires (arb.). Quatre courbes : 1 bar (bleu), 10 bar (vert), 20 bar (rouge), 31 bar (cyan).
+\begin{itemize}
+\item Un pic étroit vers 310 nm (ultraviolet proche) : très faible à 1 bar, il grandit fortement avec la pression et est maximal à 31 bar.
+\item Un fond continu large entre 350 et 500 nm (bleu), visible surtout à 31 bar.
+\end{itemize}
+Conclusion : plus la pression est élevée, plus le rayonnement est intense.
+
+\subsection{Réactions de chimiluminescence}
+Deux sources probables ($*$ désigne une molécule excitée) :
+\begin{align}
+OH + H &\to H_2O^* \to H_2O + h\nu \\
+OH + OH &\to H_2O_2^* \to H_2O_2 + h\nu
+\end{align}
+La seconde réaction (5.2) est encadrée dans ton cours.
+
+Énergie d'un photon (photon energy), $h$ constante de Planck, $c$ vitesse de la lumière :
+\[ E = h\nu = \frac{h c}{\lambda} \]
+
+\subsection{Application}
+Selon la pression et le couple de réactifs, la longueur d'onde émise n'est pas la même. On peut donc placer une caméra multispectrale (multispectral camera) pour voir quel carburant un avion ou une fusée utilise.
+
+\section{Turbomachines : turbine et compresseur}
+
+\subsection{Schéma de la turbine}
+Le dessin montre une turbine vue de face : un moyeu (hub) circulaire au centre, avec des aubes (blades) courbées. Sur une aube sont indiqués l'intrados (pressure side) et l'extrados (suction side). Les lignes vertes sont les lignes de courant qui contournent les aubes. $\omega$ est la vitesse de rotation. Le mot « impact » rappelle que l'écoulement frappe l'aube et lui cède de l'énergie.
+
+Phrase du cours : la turbine récupère, le compresseur donne (de l'énergie au fluide). Voir ensuite le triangle des vitesses (velocity triangle) : vitesse méridienne, vitesse tangentielle, rothalpie.
+
+\subsection{Triangle des vitesses (velocity triangle)}
+Vitesse d'entraînement de l'aube (blade speed) au rayon $R$ :
+\[ U = \omega R \]
+Composition des vitesses (absolue = relative + entraînement) :
+\[ \vec{V} = \vec{W} + \vec{U} \]
+Composantes de la vitesse absolue : méridienne $V_m$ (axiale) et tangentielle $V_t$ (giration, swirl) :
+\begin{align}
+V^2 &= V_m^2 + V_t^2 \\
+\tan\alpha &= V_t / V_m
+\end{align}
+Vitesse relative vue par l'aube :
+\[ W^2 = V_m^2 + (U - V_t)^2 \]
+
+\subsection{Équation d'Euler des turbomachines}
+Travail massique échangé entre l'aube et le fluide :
+\[ w = \Delta h_t = U_2 V_{t2} - U_1 V_{t1} \]
+$w > 0$ pour un compresseur (le fluide reçoit), $w < 0$ pour une turbine (le fluide cède).
+
+\subsection{Rothalpie (rothalpy)}
+Dans le repère tournant de l'aube, la rothalpie se conserve le long d'une ligne de courant relative :
+\[ I = h + \frac{W^2}{2} - \frac{U^2}{2} = \text{cste} \]
+
+\subsection{Schéma rotor / stator}
+Le schéma montre un étage de compression : des aubes de rotor (aubes mobiles) en bleu, et une aube de stator (stator vane, partie fixe) en rouge au milieu.
+\begin{itemize}
+\item Sur chaque aube de rotor : signes (+) sur l'intrados (surpression) et (−) sur l'extrados (dépression).
+\item En bas à gauche : le triangle des vitesses à l'entrée, avec $V_m$ (composante méridienne), $V_t$ (tangentielle), la vitesse $V$ de l'écoulement et l'angle $\alpha_1$. $U_\infty$ désigne la vitesse amont.
+\item La ligne verte en tirets est une ligne de courant. En sortie du premier rotor son angle est $\alpha_2$, qui n'est pas optimal pour le rotor suivant (pression moyenne en zone de fort $\Delta P$).
+\item Le stator redresse la ligne de courant : on retrouve $\alpha_3 \approx \alpha_1$, et le rotor suivant reçoit un flux bien orienté.
+\end{itemize}
+Sans le stator, les lignes de courant ont le mauvais angle pour le rotor suivant.
+
+Degré de réaction de l'étage (degree of reaction) :
+\[ R = \frac{\Delta h_{rotor}}{\Delta h_{etage}} \]
+
+\section{Aube vrillée et effets radiaux (profil entropique)}
+
+\subsection{Schéma de l'aube}
+Le schéma représente une aube fixée sur un moyeu (hub) qui tourne à la vitesse $\omega$ (flèche rouge). Le bord d'attaque (leading edge) est signalé en vert. Les flèches bleues $V_R$ sont les vitesses locales : elles sont plus grandes quand on s'éloigne du moyeu, car
+\[ V = \omega R \]
+Deux échelles de couleur :
+\begin{itemize}
+\item Pression : décroît avec $R$ (sombre en haut à jaune/rouge).
+\item Mach : croît avec $R$, du moyeu (R faible) vers la tête (R élevé).
+\end{itemize}
+Annotations du cours :
+\begin{itemize}
+\item À cause du gradient de Mach, l'intensité de la pression est variable le long de l'aube (écart de pression entre intrados et extrados différent selon $R$).
+\item En vert, en tête d'aube : zone de décollement (flow separation).
+\item En rouge, près du moyeu : zone avec le plus de frottement, donc l'entropie augmente ($\Delta S$ augmente) : « frottement moyen ».
+\end{itemize}
+
+\subsection{Explication}
+Zone de décollement en bout d'aube (blade tip) : comme $V = \omega R$ (gradient de $V$), plus on s'éloigne de l'axe, plus le Mach est élevé. Il y a donc un risque de décollement des lignes de courant (LDC) en tête d'aube, avec apparition d'un tourbillon (vortex).
+
+La cavitation (cavitation) est une implosion de bulles à proximité de l'aube, quand la pression locale tombe sous la pression de vapeur saturante. Au sens strict elle concerne les liquides (pompes, hélices marines). Dans un compresseur d'air, l'équivalent en tête d'aube est le décollement et les chocs.
+
+Remarque sur la pression : dans le repère de l'aube, plus le Mach relatif est élevé, plus la pression statique locale est basse (Bernoulli), ce qui explique « pression décroît avec $R$ » sur le schéma. En parallèle, l'équilibre radial moyen s'écrit
+\[ \frac{dP}{dR} = \rho \frac{V_t^2}{R} \]
+et donne une pression moyenne qui croît avec $R$ en présence de giration. Les deux effets coexistent : à vérifier avec ton cours.
+
+Mach relatif en un point de l'aube :
+\[ M_{rel} = W / a \]
+
+\section{À retenir}
+\begin{itemize}
+\item Hugoniot : $dA/A = (M^2 - 1) dV/V$, donc $M = 1$ seulement au col.
+\item Régimes de tuyère : subsonique, col sonique ($M_{cr}$), poche supersonique, choc normal dans le divergent ($M_{DD}$), choc en sortie, chocs obliques, réflexion de Mach.
+\item Choc normal : $P$, $T$, $\rho$ augmentent, $P_t$ diminue, $s$ augmente.
+\item Diamants de choc : réflexions alternées choc / détente sur la frontière libre du jet.
+\item Après le choc, $P$ et $T$ élevés donnent le rayonnement bleu (chimiluminescence).
+\item Tuyère à géométrie variable : évite le décollement et le battement.
+\item Euler : $w = U_2 V_{t2} - U_1 V_{t1}$, avec $U = \omega R$.
+\item Le stator redresse l'écoulement : $\alpha_3 \approx \alpha_1$.
+\item En tête d'aube, $M$ élevé donc risque de décollement et de vortex.
+\end{itemize}
+
+\section{Glossaire français - anglais}
+\begin{description}
+\item[turboréacteur double flux] turbofan engine
+\item[soufflante] fan
+\item[nacelle] nacelle
+\item[flux secondaire / flux sec] bypass flow
+\item[flux primaire] core flow
+\item[taux de dilution] bypass ratio
+\item[compresseur] compressor
+\item[chambre de combustion] combustor
+\item[turbine] turbine
+\item[arbre] shaft
+\item[tuyère] nozzle
+\item[col] throat
+\item[lèvres de la tuyère] nozzle lips
+\item[poussée] thrust
+\item[enthalpie] enthalpy
+\item[entropie] entropy
+\item[ligne de courant (LDC)] streamline
+\item[débit bloqué] choked flow
+\item[vitesse du son] speed of sound
+\item[nombre de Mach] Mach number
+\item[Mach critique] critical Mach number
+\item[Mach de divergence de traînée] drag divergence Mach number
+\item[poche supersonique] supersonic pocket
+\item[choc normal] normal shock
+\item[choc oblique] oblique shock
+\item[détente] expansion
+\item[faisceau de détente] expansion fan
+\item[réflexion de Mach] Mach reflection
+\item[disque de Mach] Mach disk
+\item[point triple] triple point
+\item[ligne de glissement] slip line
+\item[diamants de choc] shock diamonds
+\item[frontière libre du jet] jet boundary
+\item[sur-détendu] overexpanded
+\item[sous-détendu] underexpanded
+\item[tuyère adaptée] ideally expanded nozzle
+\item[tuyère à géométrie variable] variable geometry nozzle
+\item[décollement] flow separation
+\item[couche limite] boundary layer
+\item[tourbillon] vortex
+\item[battement structurel] structural flutter
+\item[chimiluminescence] chemiluminescence
+\item[rayonnement bleu] blue radiation
+\item[caméra multispectrale] multispectral camera
+\item[aube] blade
+\item[moyeu] hub
+\item[bout d'aube / tête d'aube] blade tip
+\item[bord d'attaque] leading edge
+\item[intrados] pressure side
+\item[extrados] suction side
+\item[rotor] rotor
+\item[stator] stator vane
+\item[triangle des vitesses] velocity triangle
+\item[vitesse méridienne] meridional velocity
+\item[vitesse tangentielle (giration)] tangential velocity (swirl)
+\item[rothalpie] rothalpy
+\item[degré de réaction] degree of reaction
+\item[cavitation] cavitation
+\end{description}
+
+\end{document}
